@@ -1,7 +1,8 @@
-import { showNotification } from "../utils/helpers.js";
+export function navigate(path) {
+  window.location.hash = path;
+  window.dispatchEvent(new CustomEvent("routechange", { detail: { path } }));
+}
 
-export function initNotifications() {
-
-  const notifs = JSON.parse(localStorage.getItem("notifications") || "[]");
-  notifs.slice(-3).forEach((n) => showNotification(n.text));
+export function getCurrentPath() {
+  return window.location.hash.slice(1) || "/";
 }
