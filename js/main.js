@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     if (e.target.id === "home-link") {
       e.preventDefault();
-      navigate("/");
+      navigate("#/");
     }
     if (e.target.id === "export-btn") {
       exportToCSV();
