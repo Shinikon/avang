@@ -1,4 +1,3 @@
-// js/main.js
 import { initStorage } from "./storage.js";
 import { setupRouter } from "./router.js";
 import { initNotifications } from "./ui/notifications.js";
