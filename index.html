@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Система управления заявками</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav style="display: flex; align-items: center; gap: 20px">
+        <a href="/" id="home-link"><h1>Система заявок</h1></a>
+        <button id="export-btn" class="btn">Экспорт в CSV</button>
+        <button id="logout-btn" class="btn btn-outline" style="display: none">
+          Выйти
+        </button>
+      </nav>
+    </header>
+
+    <main id="app">Загрузка...</main>
+
+    <div id="notification-container"></div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
