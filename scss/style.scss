@@ -558,19 +558,17 @@ table {
     line-height: 1.4;
 
     &::before {
-      flex: 0 0 42%; 
+      flex: 0 0 42%;
       font-weight: 600;
       color: $text-secondary;
       content: attr(data-label) ":";
       margin-right: 8px;
     }
 
-
     &:not([data-label=""]) {
       flex: 0 0 55%;
       text-align: right;
     }
-
 
     .status-badge,
     .priority-high,
