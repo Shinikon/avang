@@ -13,5 +13,5 @@ export function navigate(path) {
 }
 
 export function getCurrentPath() {
-  return window.location.hash.slice(1) || "#/";
+  return window.location.hash.slice(1) || "/";
 }
