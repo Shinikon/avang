@@ -2,92 +2,142 @@ import { getRequests, getUsers, findUser, statusLabels, priorityLabels, formatDa
 import { navigate } from '../utils/helpers.js';
 import { showQuickProfile } from './userProfile.js';
 
-export function renderRequestList() {
-  const requests = getRequests();
-  const users = getUsers();
-  const developers = users.filter(u => u.role === 'developer');
+export async function renderRequestList() {
 
+  const response = await fetch('templates/request-list.html');
   const app = document.getElementById('app');
-  app.innerHTML = '';
+  app.innerHTML = await response.text();
 
-  const container = document.createElement('div');
-  container.innerHTML = `
-    <div class="filters">
-      <input type="text" id="search-input" placeholder="Поиск..." />
-      <select id="status-filter"><option value="">Все статусы</option>
-        <option value="new">Новая</option>
-        <option value="in-progress">В работе</option>
-        <option value="clarification">Уточнения</option>
-        <option value="rejected">Отклонено</option>
-        <option value="done">Выполнено</option>
-      </select>
-      <select id="priority-filter"><option value="">Все приоритеты</option>
-        <option value="low">Низкий</option>
-        <option value="medium">Средний</option>
-        <option value="high">Высокий</option>
-        <option value="critical">Критический</option>
-      </select>
-      <select id="assignee-filter"><option value="">Все исполнители</option>
-        ${developers.map(d => `<option value="${d.id}">${d.name}</option>`).join('')}
-      </select>
-    </div>
-    <table><thead><tr>
-      <th>ID</th><th>Заголовок</th><th>Статус</th><th>Приоритет</th>
-      <th>Автор</th><th>Исполнитель</th><th>Дата</th>
-    </tr></thead><tbody id="requests-body"></tbody></table>
-  `;
-  app.appendChild(container);
+  const requests = getRequests();
+  const developers = getUsers().filter(u => u.role === 'developer');
 
-  const render = () => {
+
+  const fillSelect = (selectId, options) => {
+    const select = document.getElementById(selectId);
+    options.forEach(([value, label]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+  };
+
+  fillSelect('status-filter', Object.entries(statusLabels));
+  fillSelect('priority-filter', Object.entries(priorityLabels));
+
+  const assigneeSelect = document.getElementById('assignee-filter');
+  developers.forEach(user => {
+    const option = document.createElement('option');
+    option.value = user.id;
+    option.textContent = user.name;
+    assigneeSelect.appendChild(option);
+  });
+
+
+  app.addEventListener('click', (e) => {
+    if (e.target.classList.contains('request-link')) {
+      e.preventDefault();
+      navigate(`/request/${e.target.dataset.id}`);
+    }
+    if (e.target.classList.contains('user-popup')) {
+      e.preventDefault();
+      showQuickProfile(e.target.dataset.id);
+    }
+  });
+
+
+  const renderTable = () => {
     const search = document.getElementById('search-input').value.toLowerCase();
     const status = document.getElementById('status-filter').value;
     const priority = document.getElementById('priority-filter').value;
     const assignee = document.getElementById('assignee-filter').value;
 
+    const filtered = requests.filter(r => {
+      const author = findUser(r.authorId);
+      const matchesSearch =
+        r.title.toLowerCase().includes(search) ||
+        (r.description || '').toLowerCase().includes(search) ||
+        author.name.toLowerCase().includes(search);
+      return matchesSearch &&
+        (!status || r.status === status) &&
+        (!priority || r.priority === priority) &&
+        (!assignee || r.assigneeId === assignee);
+    });
+
     const tbody = document.getElementById('requests-body');
     tbody.innerHTML = '';
 
-    const filtered = requests.filter(r => {
-      const matchesSearch = 
-        r.title.toLowerCase().includes(search) ||
-        (r.description?.toLowerCase().includes(search)) ||
-        findUser(r.authorId).name.toLowerCase().includes(search);
-      return matchesSearch &&
-             (!status || r.status === status) &&
-             (!priority || r.priority === priority) &&
-             (!assignee || r.assigneeId === assignee);
-    });
-
     filtered.forEach(r => {
       const row = document.createElement('tr');
+
       const author = findUser(r.authorId);
       const assigneeUser = r.assigneeId ? findUser(r.assigneeId) : null;
-      row.innerHTML = `
-        <td data-label="ID">${r.id}</td>
-        <td data-label="Заголовок"><a href="#" class="link request-link" data-id="${r.id}">${r.title}</a></td>
-        <td data-label="Статус"><span class="status-badge status-${r.status}">${statusLabels[r.status]}</span></td>
-        <td data-label="Приоритет"><span class="priority-${r.priority}">${priorityLabels[r.priority]}</span></td>
-        <td data-label="Автор"><a href="#" class="link user-popup" data-id="${author.id}">${author.name}</a></td>
-        <td data-label="Исполнитель">${assigneeUser ? assigneeUser.name : '—'}</td>
-        <td data-label="Дата">${formatDate(r.createdAt)}</td>
-      `;
-      tbody.appendChild(row);
 
-      row.querySelector('.request-link').addEventListener('click', (e) => {
-        e.preventDefault();
-        navigate(`/request/${r.id}`);
-      });
-      row.querySelector('.user-popup')?.addEventListener('click', (e) => {
-        e.preventDefault();
-        showQuickProfile(r.authorId);
-      });
+
+      const tdId = document.createElement('td');
+      tdId.dataset.label = 'ID';
+      tdId.textContent = r.id;
+      row.appendChild(tdId);
+
+      const tdTitle = document.createElement('td');
+      tdTitle.dataset.label = 'Заголовок';
+      const titleLink = document.createElement('a');
+      titleLink.href = '#';
+      titleLink.className = 'link request-link';
+      titleLink.dataset.id = r.id;
+      titleLink.textContent = r.title;
+      tdTitle.appendChild(titleLink);
+      row.appendChild(tdTitle);
+
+
+      const tdStatus = document.createElement('td');
+      tdStatus.dataset.label = 'Статус';
+      const statusBadge = document.createElement('span');
+      statusBadge.className = `status-badge status-${r.status}`;
+      statusBadge.textContent = statusLabels[r.status];
+      tdStatus.appendChild(statusBadge);
+      row.appendChild(tdStatus);
+
+
+      const tdPriority = document.createElement('td');
+      tdPriority.dataset.label = 'Приоритет';
+      const priorityBadge = document.createElement('span');
+      priorityBadge.className = `priority-${r.priority}`;
+      priorityBadge.textContent = priorityLabels[r.priority];
+      tdPriority.appendChild(priorityBadge);
+      row.appendChild(tdPriority);
+
+
+      const tdAuthor = document.createElement('td');
+      tdAuthor.dataset.label = 'Автор';
+      const authorLink = document.createElement('a');
+      authorLink.href = '#';
+      authorLink.className = 'link user-popup';
+      authorLink.dataset.id = author.id;
+      authorLink.textContent = author.name;
+      tdAuthor.appendChild(authorLink);
+      row.appendChild(tdAuthor);
+
+
+      const tdAssignee = document.createElement('td');
+      tdAssignee.dataset.label = 'Исполнитель';
+      tdAssignee.textContent = assigneeUser ? assigneeUser.name : '—';
+      row.appendChild(tdAssignee);
+
+
+      const tdDate = document.createElement('td');
+      tdDate.dataset.label = 'Дата';
+      tdDate.textContent = formatDate(r.createdAt);
+      row.appendChild(tdDate);
+
+      tbody.appendChild(row);
     });
   };
 
-  document.getElementById('search-input').addEventListener('input', render);
-  document.getElementById('status-filter').addEventListener('change', render);
-  document.getElementById('priority-filter').addEventListener('change', render);
-  document.getElementById('assignee-filter').addEventListener('change', render);
+  document.getElementById('search-input').addEventListener('input', renderTable);
+  document.getElementById('status-filter').addEventListener('change', renderTable);
+  document.getElementById('priority-filter').addEventListener('change', renderTable);
+  document.getElementById('assignee-filter').addEventListener('change', renderTable);
 
-  render();
+  renderTable();
 }

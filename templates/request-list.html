@@ -1,0 +1,28 @@
+<div class="requests-page">
+  <div class="filters">
+    <input type="text" id="search-input" placeholder="Поиск..." />
+    <select id="status-filter">
+      <option value="">Все статусы</option>
+    </select>
+    <select id="priority-filter">
+      <option value="">Все приоритеты</option>
+    </select>
+    <select id="assignee-filter">
+      <option value="">Все исполнители</option>
+    </select>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Заголовок</th>
+        <th>Статус</th>
+        <th>Приоритет</th>
+        <th>Автор</th>
+        <th>Исполнитель</th>
+        <th>Дата</th>
+      </tr>
+    </thead>
+    <tbody id="requests-body"></tbody>
+  </table>
+</div>

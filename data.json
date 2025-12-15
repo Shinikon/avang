@@ -1,0 +1,71 @@
+{
+  "users": [
+    {
+      "id": "user-1",
+      "name": "Иван Петров",
+      "role": "requester",
+      "department": "Отдел продаж",
+      "email": "ivan@example.com",
+      "phone": "+7 (999) 123-45-67"
+    },
+    {
+      "id": "user-2",
+      "name": "Мария Сидорова",
+      "role": "requester",
+      "department": "Маркетинг",
+      "email": "maria@example.com",
+      "phone": "+7 (999) 234-56-78"
+    },
+    {
+      "id": "dev-1",
+      "name": "Алексей Кузнецов",
+      "role": "developer",
+      "department": "Разработка",
+      "email": "alexey@example.com",
+      "phone": "+7 (999) 345-67-89"
+    },
+    {
+      "id": "dev-2",
+      "name": "Елена Волкова",
+      "role": "developer",
+      "department": "Разработка",
+      "email": "elena@example.com",
+      "phone": "+7 (999) 456-78-90"
+    }
+  ],
+  "requests": [
+    {
+      "id": "req-1",
+      "title": "Не работает кнопка сохранения",
+      "description": "После обновления интерфейса кнопка \"Сохранить\" не реагирует на клик.",
+      "status": "in-progress",
+      "priority": "high",
+      "createdAt": "2025-11-28T10:00:00Z",
+      "authorId": "user-1",
+      "assigneeId": "dev-1",
+      "comments": [
+        {
+          "id": "c1",
+          "authorId": "dev-1",
+          "text": "Нужны логи из консоли.",
+          "action": "clarify",
+          "reason": "",
+          "attachments": [],
+          "timestamp": "2025-11-29T09:15:00Z",
+          "readBy": ["user-1"]
+        }
+      ]
+    },
+    {
+      "id": "req-2",
+      "title": "Добавить экспорт в Excel",
+      "description": "Пользователи просят экспорт отчётов в Excel.",
+      "status": "new",
+      "priority": "medium",
+      "createdAt": "2025-12-01T14:30:00Z",
+      "authorId": "user-2",
+      "assigneeId": null,
+      "comments": []
+    }
+  ]
+}
