@@ -66,6 +66,160 @@
       "authorId": "user-2",
       "assigneeId": null,
       "comments": []
+    },
+    {
+  "id": "req-3",
+  "title": "Ошибка загрузки изображений в карточке товара",
+  "description": "При добавлении изображения форматов WebP и AVIF изображение не отображается на фронтенде.",
+  "status": "in-progress",
+  "priority": "high",
+  "createdAt": "2025-12-05T11:30:00Z",
+  "authorId": "user-1",
+  "assigneeId": "dev-2",
+  "comments": []
+},
+{
+  "id": "req-4",
+  "title": "Добавить поддержку тёмной темы",
+  "description": "Пользователи просят возможность переключения на тёмный режим интерфейса.",
+  "status": "new",
+  "priority": "medium",
+  "createdAt": "2025-12-07T09:10:00Z",
+  "authorId": "user-2",
+  "assigneeId": null,
+  "comments": []
+},
+{
+  "id": "req-5",
+  "title": "Исправить опечатку в тексте 'Приветсвую' на главной",
+  "description": "Слово 'Приветсвую' написано с ошибкой в приветственном баннере.",
+  "status": "done",
+  "priority": "low",
+  "createdAt": "2025-11-25T15:20:00Z",
+  "authorId": "user-1",
+  "assigneeId": "dev-1",
+  "comments": [
+    {
+      "id": "c2",
+      "authorId": "dev-1",
+      "text": "Исправлено в коммите abc123.",
+      "action": "accept",
+      "reason": "",
+      "attachments": [],
+      "timestamp": "2025-11-26T10:05:00Z",
+      "readBy": ["user-1"]
     }
+  ]
+},
+{
+  "id": "req-6",
+  "title": "API возвращает 500 при пустом запросе поиска",
+  "description": "Если отправить пустой запрос к /api/search, сервер падает с ошибкой 500.",
+  "status": "clarification",
+  "priority": "critical",
+  "createdAt": "2025-12-12T14:45:00Z",
+  "authorId": "user-2",
+  "assigneeId": "dev-1",
+  "comments": [
+    {
+      "id": "c3",
+      "authorId": "dev-1",
+      "text": "Нужны шаги для воспроизведения и пример тела запроса.",
+      "action": "clarify",
+      "reason": "",
+      "attachments": [],
+      "timestamp": "2025-12-12T16:30:00Z",
+      "readBy": ["user-2"]
+    }
+  ]
+},
+{
+  "id": "req-7",
+  "title": "Увеличить время сессии до 2 часов",
+  "description": "Текущее время сессии (30 минут) слишком мало для работы с длинными формами.",
+  "status": "rejected",
+  "priority": "medium",
+  "createdAt": "2025-12-01T12:00:00Z",
+  "authorId": "user-1",
+  "assigneeId": "dev-2",
+  "comments": [
+    {
+      "id": "c4",
+      "authorId": "dev-2",
+      "text": "Отклонено по соображениям безопасности.",
+      "action": "reject",
+      "reason": "Безопасность",
+      "attachments": [],
+      "timestamp": "2025-12-02T09:15:00Z",
+      "readBy": ["user-1"]
+    }
+  ]
+},
+{
+  "id": "req-8",
+  "title": "Сделать экспорт в PDF",
+  "description": "Нужна возможность экспортировать отчёт в PDF, а не только в CSV.",
+  "status": "new",
+  "priority": "medium",
+  "createdAt": "2025-12-14T10:20:00Z",
+  "authorId": "user-2",
+  "assigneeId": null,
+  "comments": []
+},
+{
+  "id": "req-9",
+  "title": "Исправить дублирование заявок при двойном клике",
+  "description": "Если быстро дважды нажать 'Отправить', создаётся две одинаковые заявки.",
+  "status": "in-progress",
+  "priority": "high",
+  "createdAt": "2025-12-10T13:40:00Z",
+  "authorId": "user-1",
+  "assigneeId": "dev-1",
+  "comments": []
+},
+{
+  "id": "req-10",
+  "title": "Обновить библиотеку Chart.js до v4",
+  "description": "Текущая версия Chart.js устарела и содержит уязвимости.",
+  "status": "done",
+  "priority": "low",
+  "createdAt": "2025-11-28T16:50:00Z",
+  "authorId": "user-2",
+  "assigneeId": "dev-2",
+  "comments": []
+},
+{
+  "id": "req-11",
+  "title": "Пользователь не может сменить пароль",
+  "description": "Кнопка 'Сменить пароль' неактивна даже при заполненных полях.",
+  "status": "clarification",
+  "priority": "high",
+  "createdAt": "2025-12-15T11:05:00Z",
+  "authorId": "user-1",
+  "assigneeId": "dev-2",
+  "comments": [
+    {
+      "id": "c5",
+      "authorId": "dev-2",
+      "text": "Какой браузер и ОС? Есть ли ошибки в консоли?",
+      "action": "clarify",
+      "reason": "",
+      "attachments": [],
+      "timestamp": "2025-12-15T11:30:00Z",
+      "readBy": ["user-1"]
+    }
+  ]
+},
+{
+  "id": "req-12",
+  "title": "Добавить уведомления в Telegram",
+  "description": "Хотим получать оповещения о новых заявках в рабочий Telegram-чат.",
+  "status": "new",
+  "priority": "critical",
+  "createdAt": "2025-12-16T09:00:00Z",
+  "authorId": "user-2",
+  "assigneeId": null,
+  "comments": []
+}
   ]
 }

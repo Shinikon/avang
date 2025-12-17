@@ -5,11 +5,17 @@
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+html,
 body {
-  background-color: #d8d8d8;
-  color: #2b2d42;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   padding-top: 72px;
-  line-height: 1.5;
+  margin: 0;
 }
 
 header {
@@ -22,16 +28,38 @@ header {
   padding: 16px 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   z-index: 1000;
   border-bottom: 1px solid rgba(215, 216, 217, 0.6745098039);
+}
+header .logo {
+  margin-right: 20px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+header .logo a {
+  text-decoration: none;
+}
+header .logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
 }
 header h1 {
   font-size: 1.35rem;
   font-weight: 700;
   color: #2b2d42;
+  margin: 0;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
 }
 header nav a {
-  margin-left: 20px;
   color: #4361ee;
   text-decoration: none;
   font-weight: 600;
@@ -40,6 +68,25 @@ header nav a {
 }
 header nav a:hover {
   color: #3a56d4;
+}
+header nav .user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+header nav .user-info .profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #4361ee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .btn {
@@ -147,6 +194,7 @@ header nav a:hover {
 }
 
 main {
+  flex: 1;
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
@@ -164,6 +212,8 @@ main {
 }
 .filters input,
 .filters select {
+  flex: 1;
+  min-width: 150px;
   padding: 10px 14px;
   border: 1px solid rgba(215, 216, 217, 0.6745098039);
   border-radius: 6px;
@@ -184,6 +234,7 @@ main {
   .filters input,
   .filters select {
     width: 100%;
+    min-width: auto;
   }
 }
 
@@ -317,6 +368,13 @@ table a.link:hover {
   border-radius: 12px;
   padding: 28px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+#back-btn {
+  margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .comments {
@@ -611,22 +669,10 @@ table a.link:hover {
   }
 }
 @media (max-width: 768px) and (min-width: 480px) {
-  .filters {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
   .filters input,
   .filters select {
     width: calc(50% - 5px);
     min-width: 150px;
-  }
-  table th,
-  table td {
-    padding: 12px 14px;
-    font-size: 0.9rem;
-  }
-  tr:hover {
-    background: #f8fafc;
   }
   .status-badge {
     font-size: 0.8rem;
@@ -640,7 +686,6 @@ table a.link:hover {
   }
   a.link {
     font-size: 0.9rem;
-    padding: 2px 6px;
   }
 }
 @media (max-width: 320px) {
@@ -654,43 +699,8 @@ table a.link:hover {
     padding: 10px 12px;
     font-size: 0.85rem;
   }
-  tr {
-    padding: 14px 16px;
-  }
-  tr td {
-    padding-left: 48%;
-  }
-  tr td::before {
-    left: 10px;
-    width: calc(48% - 20px);
-    font-size: 0.85rem;
-    word-break: break-all;
-  }
   .request-detail {
     padding: 20px 16px;
-  }
-  .request-detail h2 {
-    font-size: 1.2rem;
-  }
-  .request-detail p {
-    font-size: 0.9rem;
-  }
-  .request-detail .status-badge,
-  .request-detail .priority-high,
-  .request-detail .priority-medium,
-  .request-detail .priority-low,
-  .request-detail .priority-critical {
-    font-size: 0.85rem;
-    padding: 3px 8px;
-  }
-  .comment {
-    padding: 10px 0;
-  }
-  .comment .comment-header .comment-author {
-    font-size: 0.9rem;
-  }
-  .comment .comment-header .comment-timestamp {
-    font-size: 0.8rem;
   }
   .btn {
     padding: 6px 12px;
@@ -702,4 +712,106 @@ table a.link:hover {
   #auth-modal .auth-content .hint {
     font-size: 0.8rem;
   }
+}
+.footer {
+  background: #ffffff;
+  border-top: 1px solid rgba(215, 216, 217, 0.6745098039);
+  padding: 24px 0;
+  margin-top: 40px;
+}
+.footer .footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+.footer .footer-content p {
+  margin: 8px 0;
+}
+.footer .footer-content strong {
+  color: #2b2d42;
+}
+.footer .footer-content a {
+  color: #4361ee;
+  text-decoration: none;
+}
+.footer .footer-content a:hover {
+  text-decoration: underline;
+}
+.footer .footer-content .footer-note {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: #adb5bd;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(215, 216, 217, 0.6745098039);
+}
+header .logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: flex-end;
+}
+header nav h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2b2d42;
+}
+header nav a {
+  color: #4361ee;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.15s;
+}
+header nav a:hover {
+  color: #3a56d4;
+}
+header nav .user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+header nav .user-info #user-status {
+  white-space: nowrap;
+}
+header nav .user-info .profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #4361ee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+header nav #logout-btn {
+  display: none;
 }/*# sourceMappingURL=style.css.map */

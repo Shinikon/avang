@@ -1,28 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Система управления заявками</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-  <header>
-    <div class="logo">
-      <img src="./logo.jpg" alt="Логотип" style="width: 50px; height: 50px" />
-    </div>
-    <nav style="display: flex; align-items: center; gap: 20px">
-      <a href="#/" id="home-link"><h1>Система заявок</h1></a>
-      <button id="export-btn" class="btn">Экспорт в CSV</button>
-      <button id="logout-btn" class="btn btn-outline" style="display: none">Выйти</button>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Система управления заявками</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="./logo.jpg" alt="Логотип" />
+        <a href="#/" id="home-link"><h1>Система заявок</h1></a>
+      </div>
+      <nav>
+        <button id="export-btn" class="btn">Экспорт в CSV</button>
 
-  <main id="app">Загрузка...</main>
-  <div id="notification-container"></div>
+        <div class="user-info">
+          <span id="user-status"></span>
+          <a href="#/profile" class="profile-icon">👤</a>
+        </div>
 
-  <script type="module" src="js/main.js"></script>
-</body>
+        <button id="logout-btn" class="btn btn-outline">Выйти</button>
+      </nav>
+    </header>
+
+    <main id="app">Загрузка...</main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>
+          <strong>Система заявок</strong> — внутренний инструмент для учёта и
+          обработки технических запросов.
+        </p>
+        <p>
+          Поддержка:
+          <a href="mailto:support@avang.local">support@avang.local</a> | Тел.:
+          +7 (999) 123-45-67
+        </p>
+        <p class="footer-note">© 2025 Отдел разработки. Все права защищены.</p>
+      </div>
+    </footer>
+
+    <div id="notification-container"></div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
 </html>

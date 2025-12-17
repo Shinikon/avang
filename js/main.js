@@ -6,10 +6,9 @@ import { navigate } from "./utils/helpers.js";
 import { initAuth, handleLogout } from "./auth.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await initStorage(); 
+  await initStorage();
 
   const isLoggedIn = initAuth();
-
 
   if (isLoggedIn) {
     setupRouter();
@@ -17,22 +16,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     showLogoutButton();
   }
 
-  window.addEventListener('authchange', () => {
+  window.addEventListener("authchange", () => {
     setupRouter();
     initNotifications();
     showLogoutButton();
   });
 
-  document.addEventListener('click', (e) => {
-    if (e.target.id === 'home-link') {
+  document.addEventListener("click", (e) => {
+    if (e.target.id === "home-link") {
       e.preventDefault();
       navigate("/");
     }
-    if (e.target.id === 'export-btn') {
+    if (e.target.id === "export-btn") {
       exportToCSV();
     }
-    if (e.target.id === 'logout-btn') {
-      if (confirm('Выйти из системы?')) {
+    if (e.target.id === "logout-btn") {
+      if (confirm("Выйти из системы?")) {
         handleLogout();
       }
     }
@@ -40,6 +39,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 function showLogoutButton() {
-  const btn = document.getElementById('logout-btn');
-  if (btn) btn.style.display = 'inline-block';
+  const btn = document.getElementById("logout-btn");
+  const statusEl = document.getElementById("user-status");
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (btn && statusEl) {
+    btn.style.display = "inline-block";
+    statusEl.textContent = user.role === "guest" ? "Гость" : "Программист";
+  }
 }
