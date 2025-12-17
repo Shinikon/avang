@@ -25,25 +25,32 @@ async function loadAuthForm() {
     window.dispatchEvent(new CustomEvent("authchange"));
   });
 
+  // js/auth.js
+
   document.getElementById("dev-login-form").addEventListener("submit", (e) => {
     e.preventDefault();
 
     const form = e.target;
     const formData = new FormData(form);
-    const data = {
-      name: formData.get("name")?.trim() || "Программист",
-      password: formData.get("password"),
-    };
+    const name = formData.get("name")?.trim() || "Программист";
+    const password = formData.get("password");
 
-    if (data.password === "123") {
+    if (password === "123") {
       localStorage.setItem(
         "currentUser",
         JSON.stringify({
           id: "dev-1",
-          name: data.name,
+          name: name,
           role: "developer",
         })
       );
+
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const updatedUsers = users.map((user) =>
+        user.id === "dev-1" ? { ...user, name: name } : user
+      );
+      localStorage.setItem("users", JSON.stringify(updatedUsers));
+
       document.getElementById("auth-modal").remove();
       window.dispatchEvent(new CustomEvent("authchange"));
     }

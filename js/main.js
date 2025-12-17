@@ -6,6 +6,9 @@ import { navigate } from "./utils/helpers.js";
 import { initAuth, handleLogout } from "./auth.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  /*   localStorage.removeItem("requests");
+  localStorage.removeItem("users");
+  localStorage.removeItem("notifications"); */
   await initStorage();
 
   const isLoggedIn = initAuth();

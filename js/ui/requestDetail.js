@@ -106,7 +106,7 @@ export async function renderRequestDetail(id) {
 
     if (c.attachments.length) {
       const attDiv = document.createElement("div");
-      attDiv.textContent = "📎 " + c.attachments.join(", ");
+      c.attachments.join(", ");
       commentEl.appendChild(attDiv);
     }
 

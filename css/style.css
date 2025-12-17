@@ -14,7 +14,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #d8d8d8;
+  color: #2b2d42;
   padding-top: 72px;
+  line-height: 1.5;
   margin: 0;
 }
 
@@ -33,24 +36,18 @@ header {
   border-bottom: 1px solid rgba(215, 216, 217, 0.6745098039);
 }
 header .logo {
-  margin-right: 20px;
   display: flex;
-  gap: 30px;
   align-items: center;
+  gap: 30px;
 }
 header .logo a {
   text-decoration: none;
+  color: black;
 }
 header .logo img {
   width: 50px;
   height: 50px;
   border-radius: 8px;
-}
-header h1 {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #2b2d42;
-  margin: 0;
 }
 header nav {
   display: flex;
@@ -59,34 +56,51 @@ header nav {
   flex: 1;
   justify-content: flex-end;
 }
+header nav h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #2b2d42;
+}
 header nav a {
-  color: #4361ee;
+  color: black;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1rem;
   transition: color 0.15s;
 }
 header nav a:hover {
   color: #3a56d4;
 }
+header nav a img {
+  width: 30px;
+  height: 30px;
+}
 header nav .user-info {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
+  gap: 2px;
+  font-size: 18px;
   color: #6c757d;
 }
+header nav .user-info #user-status {
+  white-space: nowrap;
+}
 header nav .user-info .profile-icon {
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: #4361ee;
+  background: none;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-weight: bold;
   font-size: 0.9rem;
+  text-decoration: none;
+}
+header nav #logout-btn {
+  display: none;
 }
 
 .btn {
@@ -195,9 +209,25 @@ header nav .user-info .profile-icon {
 
 main {
   flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px;
+  max-width: none;
+  margin: 0;
+  padding: 24px 0;
+}
+
+.filters {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto 24px;
+  border-radius: 0;
+}
+
+table {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto 24px;
+  border-radius: 0;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .filters {
@@ -206,8 +236,7 @@ main {
   margin-bottom: 24px;
   flex-wrap: wrap;
   background: #ffffff;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 16px 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 .filters input,
@@ -239,14 +268,13 @@ main {
 }
 
 table {
-  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 8px;
   background: #ffffff;
-  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: none;
+  border: 1px solid rgba(215, 216, 217, 0.6745098039);
 }
 table th,
 table td {
@@ -366,8 +394,35 @@ table a.link:hover {
 .dev-profile {
   background: #ffffff;
   border-radius: 12px;
-  padding: 28px;
+  padding: 28px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  max-width: none;
+  margin: 0 auto;
+  margin: 50px;
+}
+
+#request-status,
+#request-priority,
+#request-date {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+#request-status.status-in-progress {
+  color: #e76f00;
+}
+
+#request-status.status-rejected {
+  color: #ef476f;
+}
+
+#request-status.status-done {
+  color: #06d6a0;
+}
+
+#request-priority.priority-critical,
+#request-priority.priority-high {
+  color: #ef476f;
 }
 
 #back-btn {
@@ -412,6 +467,7 @@ table a.link:hover {
 .comment-form {
   margin-top: 32px;
   padding-top: 24px;
+  margin: 50px;
   border-top: 1px solid rgba(215, 216, 217, 0.6745098039);
 }
 .comment-form h3 {
@@ -702,6 +758,29 @@ table a.link:hover {
   .request-detail {
     padding: 20px 16px;
   }
+  .request-detail h2 {
+    font-size: 1.2rem;
+  }
+  .request-detail p {
+    font-size: 0.9rem;
+  }
+  .request-detail .status-badge,
+  .request-detail .priority-high,
+  .request-detail .priority-medium,
+  .request-detail .priority-low,
+  .request-detail .priority-critical {
+    font-size: 0.85rem;
+    padding: 3px 8px;
+  }
+  .comment {
+    padding: 10px 0;
+  }
+  .comment .comment-header .comment-author {
+    font-size: 0.9rem;
+  }
+  .comment .comment-header .comment-timestamp {
+    font-size: 0.8rem;
+  }
   .btn {
     padding: 6px 12px;
     font-size: 0.85rem;
@@ -717,7 +796,6 @@ table a.link:hover {
   background: #ffffff;
   border-top: 1px solid rgba(215, 216, 217, 0.6745098039);
   padding: 24px 0;
-  margin-top: 40px;
 }
 .footer .footer-content {
   max-width: 1200px;
@@ -745,73 +823,4 @@ table a.link:hover {
   margin-top: 16px;
   font-size: 0.9rem;
   color: #adb5bd;
-}
-
-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #ffffff;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
-  border-bottom: 1px solid rgba(215, 216, 217, 0.6745098039);
-}
-header .logo img {
-  width: 50px;
-  height: 50px;
-  border-radius: 8px;
-}
-header nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
-  justify-content: flex-end;
-}
-header nav h1 {
-  margin: 0;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #2b2d42;
-}
-header nav a {
-  color: #4361ee;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: color 0.15s;
-}
-header nav a:hover {
-  color: #3a56d4;
-}
-header nav .user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #6c757d;
-}
-header nav .user-info #user-status {
-  white-space: nowrap;
-}
-header nav .user-info .profile-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #4361ee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-decoration: none;
-}
-header nav #logout-btn {
-  display: none;
 }/*# sourceMappingURL=style.css.map */
